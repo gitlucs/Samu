@@ -1,5 +1,6 @@
 package samu;
 
+
 public class MensagemApoio {
     private String autor;
     private String texto;

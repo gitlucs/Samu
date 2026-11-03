@@ -1,41 +1,50 @@
 package samu;
 
+import java.util.ArrayList;
+
 public class Sistema {
     private int contadorAjudas;
     private int contadorTemas;
-    private Ajuda[] ajudas;
-    private Tema[] temas;
+    private ArrayList<Ajuda> ajudas;
+    private ArrayList<Tema> temas;
 
     public Sistema() {
-        ajudas = new Ajuda[100];
-        temas = new Tema[10];
+        ajudas = new ArrayList<>();
+        temas = new ArrayList<>();
     }
 
     public int criarAjuda(String descricao, String nome){
+        if (contadorAjudas >= 1000){
+            return -1;
+        }
         Ajuda a = new Ajuda(descricao, nome, contadorAjudas);
-        ajudas[contadorAjudas] = a;
+        ajudas.add(a);
         return contadorAjudas++;
     }
 
     public void apoiarAjuda(int idAjuda){
-        ajudas[idAjuda].incrementaApoio();
+        ajudas.get(idAjuda).incrementaApoio();
     }
 
     public String exibirAjuda(int idAjuda){
-        return ajudas[idAjuda].toString();
+        return ajudas.get(idAjuda).toString();
     }
 
     public void criarMensagemApoio(int idAjuda, String descricao, String autor){
-        ajudas[idAjuda].adicionaMensagem(descricao, autor);
+        ajudas.get(idAjuda).adicionaMensagem(descricao, autor);
     }
 
     public String listarMensagens(int idAjuda){
-        return ajudas[idAjuda].exibirMensagens();
+        return ajudas.get(idAjuda).exibirMensagens();
     }
 
     public void criarTema(String nome, int id){
+        if (contadorTemas >= 100){
+            return;
+        }
         Tema t = new Tema(nome, id);
-        temas[contadorTemas++] = t;//atencao para gerencia de arraycheio
+        temas.add(t);//atencao para gerencia de arraycheio
+        contadorTemas++;
     }
 
     public void adicionarAjudaTema(int idAjuda, int idTema){
@@ -43,7 +52,7 @@ public class Sistema {
         if(t == null)//tema nao existe
             return;
 
-        Ajuda a = ajudas[idAjuda];
+        Ajuda a = ajudas.get(idAjuda);
         t.adicionaAjuda(a);//note que a ajuda adicionada ja existe no sistema
 
     }

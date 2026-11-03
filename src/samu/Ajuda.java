@@ -1,20 +1,20 @@
 package samu;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Ajuda {
     private String descricao;
     private String autor;
     private int apoio;
     private int id;
-    private MensagemApoio[] mensagens;
+    private ArrayList<MensagemApoio> mensagens;
     private int contadorMensagens;
 
     public Ajuda(String descricao, String nome, int id) {
         this.descricao = descricao;
         autor = nome;
         this.id = id;
-        mensagens = new MensagemApoio[5];
+        mensagens = new ArrayList<>();
     }
 
     public void incrementaApoio(){
@@ -27,12 +27,16 @@ public class Ajuda {
     }
 
     public String exibirMensagens() {
-        return Arrays.toString(mensagens);
+        return mensagens.toString();
     }
 
     public void adicionaMensagem(String descricao, String autor){
+        if (contadorMensagens >= 5) {
+            return;
+        }
         MensagemApoio m = new MensagemApoio(descricao, autor);
-        mensagens[contadorMensagens++] = m;//atencao para o controle do array
+        mensagens.add(m);//atencao para o controle do array
+        contadorMensagens++;
     }
 
 

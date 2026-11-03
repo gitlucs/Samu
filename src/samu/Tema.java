@@ -1,24 +1,25 @@
 package samu;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class Tema {
     private String nome;
     private int id;
-    private Ajuda[] ajudas;
+    private ArrayList<Ajuda> ajudas;
     private int contadorAjudas;
 
     public Tema(String nome, int id) {
         this.nome = nome;
         this.id = id;
-        ajudas = new Ajuda[10];
+        ajudas = new ArrayList<>();
     }
 
     public int getId() {
         return id;
     }
     public void adicionaAjuda(Ajuda ajuda){
-        ajudas[contadorAjudas++] = ajuda;//atencao para gerencia de arrays
+        ajudas.add(ajuda);//atencao para gerencia de arrays
+        contadorAjudas++;
     }
 
     public int contarAjudas(){
@@ -27,7 +28,7 @@ public class Tema {
 
     public String toString(){
         return nome + "\n"+
-                Arrays.toString(ajudas);
+                ajudas.toString();
     }
 
 }
